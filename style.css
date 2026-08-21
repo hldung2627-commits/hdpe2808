@@ -1,0 +1,278 @@
+/* --- CÀI ĐẶT CHUNG --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Quicksand', 'Comic Sans MS', cursive, sans-serif; /* Font chữ dễ thương */
+}
+
+body {
+    background-color: #f4e8fd; /* Màu tím pastel cực xinh */
+    color: #5c3a70;
+    overflow-x: hidden;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+/* Lớp nền chặn lỗi bấm nhầm khi bắn pháo */
+#touch-effects-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Rất quan trọng: cho phép bấm xuyên qua lớp này vào nút */
+    z-index: 9999;
+}
+
+/* Ẩn/Hiện các màn hình */
+.screen {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* --- MÀN HÌNH 1: HỘP QUÀ --- */
+.gift-box-container {
+    text-align: center;
+    cursor: pointer;
+    animation: bounce 2s infinite;
+}
+
+.gift-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
+.hint-text {
+    font-size: 14px;
+    color: #d175b7; /* Màu hồng đậm */
+    margin-top: 10px;
+}
+
+/* --- MÀN HÌNH 2: TIMELINE --- */
+#screen-2 {
+    justify-content: flex-start;
+    overflow-y: auto; /* Cho phép cuộn trên điện thoại */
+    padding: 50px 0;
+}
+
+.timeline-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 150px; /* Khoảng cách giữa các năm để cuộn cho đã */
+    padding-bottom: 100px;
+}
+
+/* Đường kẻ line uốn lượn giả lập */
+.timeline-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #d175b7, #9b59b6, #ffb6c1);
+    box-shadow: 0 0 10px #d175b7;
+    z-index: 1;
+}
+
+.year-btn, #go-next-btn {
+    z-index: 2;
+    padding: 15px 30px;
+    background-color: #9b59b6;
+    color: white;
+    border: 3px solid #ffb6c1;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(155, 89, 182, 0.4);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.year-btn:active, #go-next-btn:active {
+    transform: scale(0.9);
+}
+
+/* Style cho ảnh Polaroid bắn ra */
+.polaroid {
+    position: absolute;
+    background: white;
+    padding: 10px 10px 35px 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border: 1px solid #ffb6c1;
+    border-radius: 5px;
+    width: 130px;
+    height: 150px;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px; /* Tạm dùng icon thay ảnh */
+    animation: popOut 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* --- MÀN HÌNH 3: MẬT MÃ --- */
+.password-box {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 20px;
+    border: 2px dashed #9b59b6;
+    text-align: center;
+    width: 85%;
+}
+
+#password-input {
+    width: 100%;
+    padding: 15px;
+    margin: 20px 0;
+    border: 2px solid #ffb6c1;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+#submit-password {
+    background-color: #d175b7;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#password-error {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- MÀN HÌNH 4: BÁNH KEM & KHÔNG GIAN LẤP LÁNH --- */
+.background-blink {
+    background: linear-gradient(135deg, #1a0b2e, #4a235a);
+    color: white;
+    animation: starryNight 3s infinite alternate;
+}
+
+.cake-section {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.cake-image {
+    font-size: 120px;
+}
+
+.candles-group {
+    position: absolute;
+    top: -30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.candle {
+    font-size: 30px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.candle.off {
+    opacity: 0.4;
+    filter: grayscale(100%); /* Nến tắt sẽ mất màu */
+}
+
+.candle.lit-again {
+    filter: drop-shadow(0 0 15px #ffd700); /* Hiệu ứng sáng rực khi thắp lại */
+    transform: scale(1.2);
+}
+
+#typing-message {
+    font-size: 18px;
+    line-height: 1.6;
+    padding: 0 20px;
+    min-height: 100px;
+}
+
+/* --- CỬA SỔ ẨN (EASTER EGG) --- */
+#easter-egg-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.modal-content {
+    background: #fff;
+    color: #4a235a;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    width: 85%;
+    border: 3px solid #ffd700; /* Viền vàng hoàng kim */
+}
+
+#close-modal-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #ffb6c1;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* --- HIỆU ỨNG CHUYỂN ĐỘNG (ANIMATIONS) --- */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes popOut {
+    0% { transform: scale(0) rotate(0deg); opacity: 0; }
+    100% { transform: scale(1) var(--final-rotate); opacity: 1; }
+}
+
+@keyframes starryNight {
+    0% { background: linear-gradient(135deg, #1a0b2e, #4a235a); }
+    100% { background: linear-gradient(135deg, #2a1b3e, #5c3a70); }
+}
+
+/* Hạt pháo hoa/hoa khi chạm tay */
+.sparkle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #ffb6c1;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: sparkleFade 0.8s ease-out forwards;
+}
+
+@keyframes sparkleFade {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+}
