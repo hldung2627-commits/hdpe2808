@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday! 💜</title>
+    <!-- Sẽ liên kết file CSS ở bước sau -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Lớp nền dùng để tạo hiệu ứng pháo hoa chạm màn hình -->
+    <div id="touch-effects-layer"></div>
+
+    <!-- MÀN HÌNH 1: HỘP QUÀ BÍ ẨN -->
+    <section id="screen-1" class="screen active">
+        <div class="gift-box-container" id="open-gift-btn">
+            <div class="gift-icon">🎁</div>
+            <p>Cậu có một món quà này...</p>
+            <p class="hint-text">(Chạm để mở nhé)</p>
+        </div>
+    </section>
+
+    <!-- MÀN HÌNH 2: HÀNH TRÌNH KỶ NIỆM (TIMELINE) -->
+    <section id="screen-2" class="screen hidden">
+        <div class="timeline-container">
+            <!-- Đường line trái tim sẽ được vẽ bằng CSS ở đây -->
+            <div class="timeline-line"></div>
+            
+            <button class="year-btn" data-year="2022">2022</button>
+            <button class="year-btn" data-year="2023">2023</button>
+            <button class="year-btn" data-year="2024">2024</button>
+            <button class="year-btn" data-year="2025">2025</button>
+            <button class="year-btn" data-year="2026">2026</button>
+
+            <!-- Không gian để ảnh Polaroid bắn ra -->
+            <div id="photo-display-area"></div>
+
+            <button id="go-next-btn">Đi tiếp nào 💖</button>
+        </div>
+    </section>
+
+    <!-- MÀN HÌNH 3: CỔNG BẢO MẬT (MẬT MÃ) -->
+    <section id="screen-3" class="screen hidden">
+        <div class="password-box">
+            <h3>Cửa ải cuối cùng!</h3>
+            
+            <!-- [NOTE DÀNH CHO BẠN]: Nhập câu hỏi mật mã của bạn vào giữa 2 thẻ <p> bên dưới nhé -->
+            <p id="secret-question">[Câu hỏi mật mã sẽ viết ở đây]</p>
+            
+            <input type="text" id="password-input" placeholder="Nhập đáp án vào đây...">
+            <button id="submit-password">Mở khóa</button>
+            
+            <p id="password-error" class="hidden">Sai rồi lêu lêu!</p>
+        </div>
+    </section>
+
+    <!-- MÀN HÌNH 4: BÁNH KEM & LỜI CHÚC -->
+    <section id="screen-4" class="screen hidden background-blink">
+        <div class="cake-section">
+            <div class="candles-group">
+                <!-- Nến để tương tác thổi tắt / thắp lại -->
+                <div class="candle" id="candle-left" data-id="left">🕯️</div>
+                <div class="candle" id="candle-center" data-id="center">🕯️</div>
+                <div class="candle" id="candle-right" data-id="right">🕯️</div>
+            </div>
+            <div class="cake-image">🎂</div>
+        </div>
+        
+        <div class="message-section">
+            <!-- Lời chúc sẽ tự động gõ chữ ở đây -->
+            <p id="typing-message"></p>
+        </div>
+    </section>
+
+    <!-- CỬA SỔ ẨN (EASTER EGG) -->
+    <div id="easter-egg-modal" class="hidden">
+        <div class="modal-content">
+            <h2>Bí mật đã được bật mí! ✨</h2>
+            
+            <!-- [NOTE DÀNH CHO BẠN]: Nội dung quà tặng bí mật (link video, ảnh, thư tay) bạn sẽ điền vào dưới đây sau -->
+            <p>[Nội dung phần thưởng Easter Egg của bạn sẽ nằm ở đây]</p>
+            
+            <button id="close-modal-btn">Đóng lại</button>
+        </div>
+    </div>
+
+    <!-- Nhạc nền bài Happy Birthday -->
+    <audio id="bg-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
+
+    <!-- Sẽ liên kết file JS ở bước sau -->
+    <script src="script.js"></script>
+</body>
+</html>
